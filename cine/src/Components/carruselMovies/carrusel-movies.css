@@ -1,0 +1,118 @@
+/*--------------- CARRUSEL -------------------*/
+
+/*--------------- Container title adn controllers-------------------*/
+.container_titulo_controller {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.container_titulo_controller h3 {
+  color: #fff;
+}
+.container_titulo_controller .indicators button {
+  background: #fff;
+  height: 3px;
+  width: 10px;
+  cursor: pointer;
+  border: none;
+  margin-right: 2px;
+}
+.container_titulo_controller .indicators button:hover {
+  background: red;
+}
+.container_titulo_controller .indicators button.active {
+  background: red;
+}
+/*--------------- Main Container and Rows -------------------*/
+
+.movies_recomended {
+  margin-bottom: 70px;
+}
+
+.movies_recomended .main_container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.movies_recomended .main_container .left_arrow,
+.movies_recomended .main_container .right_arrow {
+  position: absolute;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 40px;
+  height: 50%;
+  top: calc(50%-25%);
+  line-height: 40px;
+  width: 50px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 500;
+  transition: 0.2s ease all;
+}
+
+.movies_recomended .main_container .left_arrow:hover,
+.movies_recomended .main_container .right_arrow:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+.movies_recomended .main_container .left_arrow {
+  left: 0;
+}
+
+.movies_recomended .main_container .right_arrow {
+  right: 0;
+}
+
+/*--------------- Carrusel -------------------*/
+.movies_recomended .container_carrusel {
+  width: 100%;
+  padding: 20px, 0;
+  overflow: hidden;
+
+  scroll-behavior: smooth; /*permite ver el comprtamiento del scroll , basicamente anima despacion al scroll*/
+}
+
+.container_carrusel .carrusel {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.container_carrusel .carrusel .movie {
+  min-width: 20%;
+  transition: 0.3s ease all;
+  box-shadow: 5px, 5px, 10px rgba(0, 0, 0, 0.3);
+}
+
+.container_carrusel .carrusel .movie.hover {
+  width: 100%;
+  vertical-align: auto;
+}
+
+.container_carrusel .carrusel .movie.hover {
+  /* cuando tenga la clase hover se la doy con js */
+  transform: scale(1.2);
+  transform-origin: center; /* crezca del centro para afuera */
+}
+.movie a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/*--------------- MEDIA QUERIES -------------------*/
+
+@media screen and (max-width: 800px) {
+  .movies_recomended .container_carrusel {
+    overflow: visible;
+  }
+  .movies_recomended .container_carrusel .carrusel {
+    /* CUANDO SEA MENRO A 800PX lo pongo en modo grilla y elimino el carrusel */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* grilla de 3  */
+    gap: 20px; /* cada elemento de la grilla  ocupa 20 px */
+  }
+  .movies_recomended .indicators,
+  .movies_recomended .left_arrow,
+  .movies_recomended .right_arrow {
+    display: none;
+  }
+}
