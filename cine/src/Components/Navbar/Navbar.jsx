@@ -1,18 +1,39 @@
-import React from "react";
-
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import MovieContext from "../../Context/Movies/Movie-context";
+import logo from "../../img/navbar/logo_cinema.png";
 export default function Navbar() {
+  const [search, setSearch] = useState({ search: "" });
+  const [page, setPage] = useState(1);
+  let navigate = useNavigate();
+  const [movies, setMovies] = useState([]);
+  function handlerChangeSearch(event) {
+    setSearch({
+      ...search,
+      [event.target.name]: event.target.value,
+    });
+    console.log(event.target.name, event.target.value);
+  }
+  const { getMoviesBySearch } = useContext(MovieContext);
+  function handlerSubmit(event) {
+    event.preventDefault();
+    getMoviesBySearch({ query: search, page });
+    navigate("/search");
+  }
+
   return (
     <section>
       <nav class="navbar navbar-expand-lg p-3 border-bottom container_navbar ">
         <div class="container-fluid">
-          <a class="navbar-brand mx-2" href="#">
+          <Link class="navbar-brand mx-2" to={"/"}>
             <img
-              src={""}
-              alt="cine"
-              width={"40px"}
+              src={logo}
+              alt="logo_cinema"
+              width={"35"}
               style={{ transform: "scale(2.2)" }}
             />
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -29,85 +50,51 @@ export default function Navbar() {
             id="navbarSupportedContent"
           >
             <div className="">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item">
-                  <a
-                    href="#"
+                  <Link
+                    to={"/"}
                     class="nav-link text-dark mx-5"
                     style={{ transform: "scale(1.2)" }}
                     aria-current="page"
                   >
                     Inicio
-                  </a>
+                  </Link>
                 </li>
+
                 <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link text-dark mx-3"
-                    style={{ transform: "scale(1.2)" }}
-                  >
-                    Nosotros
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="#"
+                  <Link
+                    to={"/algo"}
                     class="nav-link  text-dark mx-3"
                     style={{ transform: "scale(1.2)" }}
                     aria-current="page"
                   >
-                    Novedades
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link  text-dark mx-3"
-                    style={{ transform: "scale(1.2)" }}
-                    aria-current="page"
-                  >
-                    Testimonios
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link  text-dark mx-3"
-                    style={{ transform: "scale(1.2)" }}
-                    aria-current="page"
-                  >
-                    Contacto
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link  text-dark mx-3"
-                    style={{ transform: "scale(1.2)" }}
-                    aria-current="page"
-                  >
-                    Contribuye
-                  </a>
+                    algo
+                  </Link>
                 </li>
               </ul>
             </div>
-            <div className="justify-content-end">
-              <button
-                class="btn text-dark rounded-pill border border-dark mx-3"
-                type="submit"
-                style={{ transform: "scale(1.2)" }}
-              >
-                Login in
-              </button>
-              <button
-                class="btn btn-danger mx-3  rounded-pill"
-                type="submit"
-                style={{ transform: "scale(1.2)" }}
-              >
-                Registrate
-              </button>
+            <div className="nav-link text-dark mx-3">
+              <form action="" onSubmit={handlerSubmit}>
+                <div class="input-group">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="search"
+                      name="search"
+                      placeholder="Buscar película"
+                      class="form-control"
+                      onChange={handlerChangeSearch}
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
+          <div className="justify-content-end"></div>
         </div>
       </nav>
     </section>
