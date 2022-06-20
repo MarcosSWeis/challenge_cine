@@ -6,7 +6,6 @@ import logo from "../../img/navbar/logo_cinema.png";
 import CSS from "./navbar.module.css";
 export default function Navbar() {
   const [search, setSearch] = useState({ search: "" });
-
   let navigate = useNavigate();
   function handlerChangeSearch(event) {
     setPage(1);
@@ -17,14 +16,15 @@ export default function Navbar() {
     // console.log(event.target.name, event.target.value);
   }
   const { getMoviesBySearch, page, setPage } = useContext(MovieContext);
-
-  function handlerSubmit(event) {
-    event.preventDefault();
-
-    getMoviesBySearch({ query: search, page });
+  function navigateToSearch() {
     navigate("/search", {
       state: { query: search.search },
     });
+  }
+  function handlerSubmit(event) {
+    event.preventDefault();
+    getMoviesBySearch({ parameter: search.search });
+    navigateToSearch();
   }
 
   return (

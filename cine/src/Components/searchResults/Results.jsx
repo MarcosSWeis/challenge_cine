@@ -1,7 +1,7 @@
 import { css } from "jquery";
 import { Link } from "react-router-dom";
 import CSS from "../../styles/frame-image.module.css";
-export default function SearchResults({ img }) {
+export default function Results({ img }) {
   return (
     <Link to={"#!"} className={`p-1`}>
       <img
@@ -9,11 +9,6 @@ export default function SearchResults({ img }) {
         src={`https://image.tmdb.org/t/p/w185/${img}  `}
         width="100"
       />
-
-      {/* <div>
-          <h5 class="card-title">{title}</h5>
-          <p class="card-text">{shortDesc}</p>
-        </div> */}
     </Link>
   );
 }

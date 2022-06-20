@@ -109,6 +109,7 @@ export default function Carrusel_movies() {
                     img={movie.poster_path}
                     description={movie.overview}
                     key={movie.id}
+                    id={movie.id}
                   />
                 ))}
             </div>

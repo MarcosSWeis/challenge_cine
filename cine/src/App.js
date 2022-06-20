@@ -8,15 +8,19 @@ import { Route, Routes } from "react-router-dom";
 import Search from "./Pages/Search/Search";
 import FilterMovies from "./Components/Filter/FilterMovies";
 import Home from "./Pages/home/Home";
+import BottomNavbar from "./Components/Navbar/BottomNavbar";
+import ResultsFilter from "./Pages/Filter/ResultsFilter";
 
 function App() {
   return (
     <div className="App">
       <MovieState>
         <Navbar />
+        <BottomNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/filter" element={<ResultsFilter />} />
           <Route path="/movie/:id" element={<h2></h2>} />
         </Routes>
       </MovieState>

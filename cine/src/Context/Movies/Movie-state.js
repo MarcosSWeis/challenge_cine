@@ -5,9 +5,10 @@ import axios from "axios";
 
 const MovieState = (props) => {
   const [page, setPage] = useState(1);
+
   const initialState = {
     moviesHome: [],
-    moviesBySearch: [],
+    moviesBySearch: {},
     moviesFilter: {},
     page,
     setPage,
@@ -30,12 +31,12 @@ const MovieState = (props) => {
       payload: data.results,
     });
   };
-  const getMoviesBySearch = async ({ query }) => {
-    console.log(query, "query");
+  const getMoviesBySearch = async ({ parameter }) => {
+    console.log(parameter, "query movie state");
     console.log(page, "page");
 
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=10130f62218e9cc35361e52eb1fb8a01&language=en-US&query=${query.search}&page=${page}&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=10130f62218e9cc35361e52eb1fb8a01&language=en-US&query=${parameter}&page=${page}&include_adult=false`
     );
     dispatch({
       type: "GET_MOVIE_BY_SEARCH",
@@ -43,16 +44,17 @@ const MovieState = (props) => {
     });
   };
 
-  const getMoviesByFilterStar = async ({ avg_gte, avg_lte }) => {
-    // console.log(avg_gte, "avg_gte");
-    // console.log(avg_lte, "avg_lte");
+  const getMoviesByFilterStar = async ({ parameter }) => {
+    console.log(parameter.avg_gte, "avg_gte");
+    console.log(parameter.avg_lte, "avg_lte");
+    console.log(page, "page");
 
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=10130f62218e9cc35361e52eb1fb8a01&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=1&vote_average.gte=${avg_gte}&vote_average.lte=${avg_lte}&with_watch_monetization_types=flatrate`
+      `https://api.themoviedb.org/3/discover/movie?api_key=10130f62218e9cc35361e52eb1fb8a01&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=${page}&vote_average.gte=${parameter.avg_gte}&vote_average.lte=${parameter.avg_lte}&with_watch_monetization_types=flatrate`
     );
     dispatch({
       type: "GET_MOVIES_BY_STAR",
-      payload: data.results,
+      payload: data,
     });
   };
   //cualqueir componente que este dentro de este movieSate
