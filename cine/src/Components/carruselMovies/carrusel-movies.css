@@ -1,5 +1,7 @@
 /*--------------- CARRUSEL -------------------*/
-
+.bg_dark {
+  background-color: #1c1c1c;
+}
 /*--------------- Container title adn controllers-------------------*/
 .container_titulo_controller {
   display: flex;

@@ -1,50 +1,21 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import $ from "jquery";
 import CardCarruselMovie from "../rowCarruselMovies/CardCarruselMovie";
-const CarruselImg = styled.img`
-  max-width: 500px;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  transition: 1s;
-  &.loaded {
-    opacity: 1;
-  }
-`;
+import MovieContext from "../../Context/Movies/Movie-context";
+
 export default function Carrusel_movies() {
-  let [discover, setDiscover] = useState([]);
   const [numberPage, setNumberPage] = useState(0);
-  const date = new Date();
-  let month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  if (month < 10) {
-    month = "0" + month;
-  }
-  console.log(date, "date");
-  console.log(month, "month");
+  const { moviesHome, getMoviesRecommended } = useContext(MovieContext);
 
-  console.log(year, "year");
-
-  //const moviesDiscover = useSelector((state) => state.movieDiscover);
-  async function getmovies() {
-    let responseMovie = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=10130f62218e9cc35361e52eb1fb8a01&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=${year}-${month}-01&with_watch_monetization_types=flatrate`
-    );
-    setDiscover(responseMovie.data.results);
-    setNumberPage(Math.ceil(responseMovie.data.results.length / 5));
-    //porque muestro solo 5 pelis y despues scrolleo sobre x
-    //Math.ceil redonde hacia arriba , por si es un numero decimal
-  }
-  console.log(discover);
   let buttons = [0, 1, 2, 3];
   useEffect(() => {
-    getmovies();
+    getMoviesRecommended();
+    setNumberPage(Math.ceil(moviesHome.length / 5));
   }, []);
   const row = document.querySelector(".container_carrusel");
   const movies = document.querySelectorAll(".movie");
-
   const handlerRight = () => {
     //cuando se quejucte que me haga un scroll
     //accedemos al ancho completo del carrusel
@@ -71,9 +42,7 @@ export default function Carrusel_movies() {
       indicatorActived.classList.remove("active");
     }
   };
-
   //pages carrusel
-
   movies.forEach((movie) => {
     //dispara el evento cuando ingresamos a la region
     movie.addEventListener("mouseenter", (event) => {
@@ -102,7 +71,7 @@ export default function Carrusel_movies() {
     row.scrollLeft = event.target.value * row.offsetWidth;
   }
   return (
-    <div className="mt-5">
+    <div className="mt-5 bg_dark ">
       <div className="movies_recomended  container">
         <div className="container_titulo_controller">
           <h3>Descubrir</h3>
@@ -133,8 +102,8 @@ export default function Carrusel_movies() {
           </button>
           <div className="container_carrusel" id="container_carrusel">
             <div className="carrusel">
-              {discover.length > 0 &&
-                discover.map((movie) => (
+              {moviesHome.length > 0 &&
+                moviesHome.map((movie) => (
                   <CardCarruselMovie
                     title={movie.original_title}
                     img={movie.poster_path}
