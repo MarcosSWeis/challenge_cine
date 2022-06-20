@@ -7,6 +7,7 @@ import MovieState from "./Context/Movies/Movie-state";
 import { Route, Routes } from "react-router-dom";
 import Search from "./Pages/Search/Search";
 import FilterMovies from "./Components/Filter/FilterMovies";
+import Home from "./Pages/home/Home";
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
       <MovieState>
         <Navbar />
         <Routes>
-          <Route path="/" element={<FilterMovies />} />
+          <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/movie/:id" element={<Search />} />
+          <Route path="/movie/:id" element={<h2></h2>} />
         </Routes>
       </MovieState>
     </div>

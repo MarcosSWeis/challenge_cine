@@ -3,19 +3,24 @@ import Carrusel_movies from "../../Components/carruselMovies/Carrusel_movies.jsx
 import Paginate from "../../Components/Paginate/Paginate.jsx";
 import SearchResults from "../../Components/searchResults/SearchResults.jsx";
 import MovieContext from "../../Context/Movies/Movie-context";
+import { useLocation } from "react-router-dom";
 
 export default function Search() {
-  const { moviesBySearch } = useContext(MovieContext);
+  const { moviesBySearch, getMoviesBySearch } = useContext(MovieContext);
+  const { state } = useLocation();
+  const { query } = state || {};
+  console.log(moviesBySearch);
+
   return (
     <div>
-      {/*  {moviesBySearch.length > 0 ?? */} <Carrusel_movies />
-      {/* } */}
-      <div className="image-grid mt-4 w-75 m-auto">
-        {moviesBySearch.length > 0 &&
-          moviesBySearch.map((results) => (
+      <div className="image-grid mt-4 w-100 m-auto">
+        {Object.keys(moviesBySearch).length > 0 &&
+          moviesBySearch.results.map((results) => (
             <SearchResults img={results.poster_path} />
           ))}
-        {moviesBySearch.length > 0 && <Paginate />}
+        {Object.keys(moviesBySearch).length > 0 && (
+          <Paginate query={query} functionToExecute={getMoviesBySearch} />
+        )}
       </div>
     </div>
   );

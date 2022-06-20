@@ -1,31 +1,53 @@
-function Paginate() {
+import { useContext } from "react";
+import MovieContext from "../../Context/Movies/Movie-context";
+
+function Paginate({ query, functionToExecute }) {
+  const { setPage, page } = useContext(MovieContext);
+
+  function handlerPrevious() {
+    if (page < 1) {
+      setPage(page - 1);
+    }
+  }
+  function handlerFirstNumber() {}
+  function handlerMiddleNumber() {}
+  function handlerLastNumber() {}
+  function handlerNext() {
+    setPage(page + 1);
+    let search = {
+      search: query,
+    };
+    // console.log(search, "search");
+    functionToExecute({ query: search });
+  }
+
   return (
     <div aria-label="" className=" w-50 m-auto">
       <ul class="pagination">
         <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">
+          <button class="page-link" tabindex="-1" onClick={handlerPrevious}>
             Previous
-          </a>
+          </button>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">
+          <button class="page-link" onClick={handlerFirstNumber}>
             1
-          </a>
+          </button>
         </li>
         <li class="page-item active">
-          <a class="page-link" href="#">
-            2 <span class="sr-only">(current)</span>
-          </a>
+          <button class="page-link" onClick={handlerMiddleNumber}>
+            2 <span class="sr-only"></span>
+          </button>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">
+          <button class="page-link" onClick={handlerLastNumber}>
             3
-          </a>
+          </button>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">
+          <button class="page-link" onClick={handlerNext}>
             Next
-          </a>
+          </button>
         </li>
       </ul>
     </div>

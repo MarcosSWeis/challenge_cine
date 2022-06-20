@@ -7,7 +7,7 @@ export default function SearchResults({ img }) {
       <img
         className={`image-grid p-2 border rounded mb-2 mt-2 ${CSS.frame_hover} ${CSS.box_shadow}`}
         src={`https://image.tmdb.org/t/p/w185/${img}  `}
-        height="250"
+        width="100"
       />
 
       {/* <div>

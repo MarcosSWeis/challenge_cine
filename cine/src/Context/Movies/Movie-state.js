@@ -4,9 +4,13 @@ import MovieContext from "./Movie-context";
 import axios from "axios";
 
 const MovieState = (props) => {
+  const [page, setPage] = useState(1);
   const initialState = {
     moviesHome: [],
     moviesBySearch: [],
+    moviesFilter: {},
+    page,
+    setPage,
   };
   const [state, dispatch] = useReducer(MovieReducer, initialState);
 
@@ -26,7 +30,7 @@ const MovieState = (props) => {
       payload: data.results,
     });
   };
-  const getMoviesBySearch = async ({ query, page }) => {
+  const getMoviesBySearch = async ({ query }) => {
     console.log(query, "query");
     console.log(page, "page");
 
@@ -35,6 +39,19 @@ const MovieState = (props) => {
     );
     dispatch({
       type: "GET_MOVIE_BY_SEARCH",
+      payload: data,
+    });
+  };
+
+  const getMoviesByFilterStar = async ({ avg_gte, avg_lte }) => {
+    // console.log(avg_gte, "avg_gte");
+    // console.log(avg_lte, "avg_lte");
+
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=10130f62218e9cc35361e52eb1fb8a01&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=1&vote_average.gte=${avg_gte}&vote_average.lte=${avg_lte}&with_watch_monetization_types=flatrate`
+    );
+    dispatch({
+      type: "GET_MOVIES_BY_STAR",
       payload: data.results,
     });
   };
@@ -47,6 +64,10 @@ const MovieState = (props) => {
         getMoviesRecommended,
         getMoviesBySearch,
         moviesBySearch: state.moviesBySearch,
+        getMoviesByFilterStar,
+        moviesFilter: state.moviesFilter,
+        page,
+        setPage,
       }}
     >
       {props.children}

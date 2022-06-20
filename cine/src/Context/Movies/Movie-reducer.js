@@ -1,4 +1,8 @@
-import { GET_MOVIES_HOME, GET_MOVIE_BY_SEARCH } from "../actions"; // types
+import {
+  GET_MOVIES_HOME,
+  GET_MOVIE_BY_SEARCH,
+  GET_MOVIES_BY_STAR,
+} from "../actions"; // types
 
 //esta función recibe el estado actual de nuestro contexto y el action va a actualizar mi estado
 export default function (state, action) {
@@ -15,6 +19,12 @@ export default function (state, action) {
       return {
         ...state,
         moviesBySearch: payload,
+      };
+    }
+    case GET_MOVIES_BY_STAR: {
+      return {
+        ...state,
+        moviesFilter: payload,
       };
     }
     default:

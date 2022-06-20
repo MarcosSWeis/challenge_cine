@@ -1,102 +1,59 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MovieContext from "../../Context/Movies/Movie-context";
 import logo from "../../img/navbar/logo_cinema.png";
+import CSS from "./navbar.module.css";
 export default function Navbar() {
   const [search, setSearch] = useState({ search: "" });
-  const [page, setPage] = useState(1);
+
   let navigate = useNavigate();
-  const [movies, setMovies] = useState([]);
   function handlerChangeSearch(event) {
+    setPage(1);
     setSearch({
       ...search,
       [event.target.name]: event.target.value,
     });
-    console.log(event.target.name, event.target.value);
+    // console.log(event.target.name, event.target.value);
   }
-  const { getMoviesBySearch } = useContext(MovieContext);
+  const { getMoviesBySearch, page, setPage } = useContext(MovieContext);
+
   function handlerSubmit(event) {
     event.preventDefault();
+
     getMoviesBySearch({ query: search, page });
-    navigate("/search");
+    navigate("/search", {
+      state: { query: search.search },
+    });
   }
 
   return (
-    <section>
-      <nav class="navbar navbar-expand-lg p-3 border-bottom container_navbar ">
-        <div class="container-fluid">
-          <Link class="navbar-brand mx-2" to={"/"}>
-            <img
-              src={logo}
-              alt="logo_cinema"
-              width={"35"}
-              style={{ transform: "scale(2.2)" }}
+    <div className={`${CSS.container_navbar}`}>
+      <div className={`${CSS.inner_container}`}>
+        <h1 className={`${CSS.h1}`}></h1>
+        <h2 className={`${CSS.h2}`}></h2>
+        <div>
+          <form
+            action=""
+            className={`${CSS.inputSearch} m-auto `}
+            onSubmit={handlerSubmit}
+          >
+            <input
+              type="text"
+              name="search"
+              id=""
+              className={`${CSS.inputSearch} form-control`}
+              onChange={handlerChangeSearch}
             />
-          </Link>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse  justify-content-end"
-            id="navbarSupportedContent"
-          >
-            <div className="">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                <li class="nav-item">
-                  <Link
-                    to={"/"}
-                    class="nav-link text-dark mx-5"
-                    style={{ transform: "scale(1.2)" }}
-                    aria-current="page"
-                  >
-                    Inicio
-                  </Link>
-                </li>
-
-                <li class="nav-item">
-                  <Link
-                    to={"/algo"}
-                    class="nav-link  text-dark mx-3"
-                    style={{ transform: "scale(1.2)" }}
-                    aria-current="page"
-                  >
-                    algo
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="nav-link text-dark mx-3">
-              <form action="" onSubmit={handlerSubmit}>
-                <div class="input-group">
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="search"
-                      name="search"
-                      placeholder="Buscar película"
-                      class="form-control"
-                      onChange={handlerChangeSearch}
-                    />
-                  </div>
-                  <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-search"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="justify-content-end"></div>
+            <button
+              className={`btn btn-outline-secondary ${CSS.btnSearch} pb-3 `}
+              type="submit"
+            >
+              <i class={`bi bi-search ${CSS.iconSearch}`}></i>
+            </button>
+          </form>
         </div>
-      </nav>
-    </section>
+      </div>
+    </div>
   );
 }

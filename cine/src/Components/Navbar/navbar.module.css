@@ -1,0 +1,74 @@
+.container_navbar {
+  height: 200px;
+  position: relative;
+  width: 100%;
+  padding-bottom: 40%;
+  background-image: url("../../img/navbar/wallpaper_navbar.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.inner_container {
+  text-align: center;
+  width: 100%;
+  color: white;
+  position: absolute;
+}
+.h1 {
+  font-size: 7em;
+  font-family: "Shadows into light", sans-serif;
+}
+
+.h2 {
+  margin-top: -17px;
+  font-family: "Source Sans Pro" sans-serif;
+  font-size: 1.7em;
+  text-align: center;
+  font-weight: 400;
+}
+
+.a {
+  margin-top: 20px;
+  font-size: 1.3em;
+  font-family: "Source Sans Pro" sans-serif;
+}
+
+.btnNavbar {
+  display: inline-block;
+  width: 200px;
+  font-weight: bold;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.inputSearch {
+  margin-top: 50%;
+  width: 50%;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.btnNavbar:hover,
+.btnNavbar:active {
+  background-color: #fff;
+  color: #fff;
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
+}
+.btnSearch {
+  margin-top: 50%;
+  width: 5%;
+  position: relative;
+  background-color: #fff;
+}
+
+.iconSearch {
+  position: absolute;
+  top: 0px;
+  left: 5px;
+}
