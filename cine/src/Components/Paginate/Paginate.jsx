@@ -62,7 +62,7 @@ function Paginate({ parameter, functionToExecute, total_pages, current_page }) {
             {valuesPaginate[2]}
           </button>
         </li>
-        <li class={`page-item ${!(page <= total_pages) ? "disabled" : ""} `}>
+        <li class={`page-item ${!(page < total_pages) ? "disabled" : ""} `}>
           <button class="page-link" onClick={handlerNext}>
             Next
           </button>

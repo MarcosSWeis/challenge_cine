@@ -2,18 +2,14 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import $ from "jquery";
-import CardCarruselMovie from "../rowCarruselMovies/CardCarruselMovie";
+import CardCarruselMovie from "./CardCarruselMovie";
 import MovieContext from "../../Context/Movies/Movie-context";
 
-export default function Carrusel_movies() {
-  const [numberPage, setNumberPage] = useState(0);
-  const { moviesHome, getMoviesRecommended } = useContext(MovieContext);
+export default function Carrusel_movies({ dataMovie, title_carrusel }) {
+  //const [numberPage, setNumberPage] = useState(0);
 
   let buttons = [0, 1, 2, 3];
-  useEffect(() => {
-    getMoviesRecommended();
-    setNumberPage(Math.ceil(moviesHome.length / 5));
-  }, []);
+  //setNumberPage(Math.ceil(dataMovie.length / 5));
   const row = document.querySelector(".container_carrusel");
   const movies = document.querySelectorAll(".movie");
   const handlerRight = () => {
@@ -74,7 +70,7 @@ export default function Carrusel_movies() {
     <div className="mt-5 bg_dark ">
       <div className="movies_recomended  container">
         <div className="container_titulo_controller">
-          <h3>Descubrir</h3>
+          <h3>{title_carrusel}</h3>
           <div className="indicators">
             {buttons.length > 0 &&
               buttons.map((value, index) =>
@@ -102,8 +98,8 @@ export default function Carrusel_movies() {
           </button>
           <div className="container_carrusel" id="container_carrusel">
             <div className="carrusel">
-              {moviesHome.length > 0 &&
-                moviesHome.map((movie) => (
+              {dataMovie.length > 0 &&
+                dataMovie.map((movie) => (
                   <CardCarruselMovie
                     title={movie.original_title}
                     img={movie.poster_path}

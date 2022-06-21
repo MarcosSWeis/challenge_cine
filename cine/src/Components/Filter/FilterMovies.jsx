@@ -45,7 +45,7 @@ export default function FilterMovies() {
 
   function navigateToFilter(rate) {
     navigate("/filter", {
-      state: { avg: getAverage(rate) },
+      state: { avg: getAverage(rate), rate },
     });
   }
   function getMoviesContext(rate) {

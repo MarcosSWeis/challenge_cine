@@ -10,3 +10,7 @@
   justify-items: center;
   justify-content: center;
 }
+body {
+  background-color: #2b303a;
+  color: white;
+}

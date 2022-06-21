@@ -8,14 +8,17 @@ export default function ResultsFilter() {
   const { moviesFilter, getMoviesByFilterStar } = useContext(MovieContext);
   console.log(moviesFilter);
   const { state } = useLocation();
-  const { avg } = state || {};
+  const { avg, rate } = state || {};
   //   console.log(avg, "avg");
   return (
     <div>
       <div className="image-grid mt-4 w-100 m-auto">
+        <h2 className="text-center">
+          Resultados de la búsqueda por {rate / 2} estrellas
+        </h2>
         {Object.keys(moviesFilter).length > 0 &&
           moviesFilter.results.map((results) => (
-            <Results key={results.id} img={results.poster_path} />
+            <Results id={results.id} img={results.poster_path} />
           ))}
         {Object.keys(moviesFilter).length > 0 && (
           <Paginate

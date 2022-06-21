@@ -2,6 +2,9 @@ import {
   GET_MOVIES_HOME,
   GET_MOVIE_BY_SEARCH,
   GET_MOVIES_BY_STAR,
+  GET_MOVIE_BY_ID,
+  GET_MOVIE_RELATED,
+  GET_RATE_MOVIE,
 } from "../actions"; // types
 
 //esta función recibe el estado actual de nuestro contexto y el action va a actualizar mi estado
@@ -25,6 +28,24 @@ export default function (state, action) {
       return {
         ...state,
         moviesFilter: payload,
+      };
+    }
+    case GET_MOVIE_BY_ID: {
+      return {
+        ...state,
+        movie_detail: payload,
+      };
+    }
+    case GET_MOVIE_RELATED: {
+      return {
+        ...state,
+        movies_related: payload,
+      };
+    }
+    case GET_RATE_MOVIE: {
+      return {
+        ...state,
+        rate_movie: payload,
       };
     }
     default:

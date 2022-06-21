@@ -10,6 +10,7 @@ import FilterMovies from "./Components/Filter/FilterMovies";
 import Home from "./Pages/home/Home";
 import BottomNavbar from "./Components/Navbar/BottomNavbar";
 import ResultsFilter from "./Pages/Filter/ResultsFilter";
+import MovieDetail from "./Pages/MovieDetail/MovieDetail";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/filter" element={<ResultsFilter />} />
-          <Route path="/movie/:id" element={<h2></h2>} />
+          <Route path="/movie/:id" element={<MovieDetail />} />
         </Routes>
       </MovieState>
     </div>
