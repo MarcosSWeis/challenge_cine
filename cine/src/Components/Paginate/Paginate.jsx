@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MovieContext from "../../Context/Movies/Movie-context";
 
 function Paginate({ parameter, functionToExecute, total_pages, current_page }) {
-  const { setPage, page } = useContext(MovieContext);
-  console.log(parameter, "query que viene de paginate en este caso");
+  const { setPage, page, valuesPaginate } = useContext(MovieContext);
+
   function handlerPrevious() {
     if (page > 1) {
       setPage(page - 1);
@@ -15,18 +15,25 @@ function Paginate({ parameter, functionToExecute, total_pages, current_page }) {
   function handlerLastNumber() {}
   function handlerNext() {
     setPage(page + 1);
-    // console.loparameterg(search, "search");
+    console.log("ejecuto handlerNext ");
+
+    console.log(page, "page paginate");
     functionToExecute({ parameter: parameter });
+    // console.loparameterg(search, "search");
   }
-  let valuesPaginate = [1, 2, 3];
-  if (page > valuesPaginate[3]) {
-    for (let i = 0; i < valuesPaginate.length; i++) {
-      valuesPaginate[i] = valuesPaginate[3] + i + page;
+
+  console.log(page, "page paginate fuera de lafuncion");
+
+  if (page > valuesPaginate[2]) {
+    for (let i = 0, j = 1; i < valuesPaginate.length; i++, j++) {
+      valuesPaginate[i] = valuesPaginate[2] + j;
     }
   }
+
+  console.log(valuesPaginate, "valuesPaginate");
   return (
-    <div aria-label="" className=" w-50 m-auto ">
-      <ul class="pagination w-75 m-auto">
+    <div aria-label="" className=" w-75 m-auto ">
+      <ul class="pagination w-100 justify-content-center">
         <li class={`page-item ${page > 1 ? "" : "disabled"} `}>
           <button class="page-link" tabindex="-1" onClick={handlerPrevious}>
             Previous

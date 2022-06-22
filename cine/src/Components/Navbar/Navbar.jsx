@@ -1,27 +1,29 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MovieContext from "../../Context/Movies/Movie-context";
-import logo from "../../img/navbar/logo_cinema.png";
+
 import CSS from "./navbar.module.css";
 export default function Navbar() {
   const [search, setSearch] = useState({ search: "" });
+  const { getMoviesBySearch, page, setPage, setValuesPaginate } =
+    useContext(MovieContext);
   let navigate = useNavigate();
   function handlerChangeSearch(event) {
+    setValuesPaginate([1, 2, 3]);
     setPage(1);
     setSearch({
       ...search,
       [event.target.name]: event.target.value,
     });
-    // console.log(event.target.name, event.target.value);
   }
-  const { getMoviesBySearch, page, setPage } = useContext(MovieContext);
   function navigateToSearch() {
     navigate("/search", {
       state: { query: search.search },
     });
   }
   function handlerSubmit(event) {
+    setPage(1);
+    setValuesPaginate([1, 2, 3]);
     event.preventDefault();
     getMoviesBySearch({ parameter: search.search });
     navigateToSearch();
@@ -41,6 +43,7 @@ export default function Navbar() {
             <input
               type="text"
               name="search"
+              placeholder="Busque su película"
               id=""
               className={`${CSS.inputSearch} form-control`}
               onChange={handlerChangeSearch}

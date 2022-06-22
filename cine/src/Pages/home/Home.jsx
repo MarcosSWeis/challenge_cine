@@ -13,12 +13,10 @@ function Home() {
   return (
     <div>
       <div>
-        {moviesHome.length > 0 && (
-          <Carrusel_movies
-            dataMovie={moviesHome}
-            title_carrusel={title_carrusel}
-          />
-        )}
+        <Carrusel_movies
+          dataMovie={moviesHome}
+          title_carrusel={title_carrusel}
+        />
       </div>
     </div>
   );

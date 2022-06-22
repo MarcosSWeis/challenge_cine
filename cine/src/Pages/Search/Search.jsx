@@ -14,7 +14,10 @@ export default function Search() {
 
   return (
     <div>
-      <h2 className="mt-2 text-center">Resultados de la búsqueda</h2>
+      {Object.keys(moviesBySearch).length > 0 &&
+        moviesBySearch.results.length > 0 && (
+          <h2 className="mt-2 text-center">Resultados de la búsqueda</h2>
+        )}
       <div className="image-grid mt-4 w-100 m-auto">
         {Object.keys(moviesBySearch).length > 0 ? (
           moviesBySearch.results.length > 0 ? (
@@ -22,21 +25,24 @@ export default function Search() {
               <Results img={results.poster_path} id={results.id} />
             ))
           ) : (
-            <Loader />
+            <h3 className=" text-center mb-5">
+              No se encontraron resultados para la búsqueda
+            </h3>
           )
         ) : (
           <h1 className="text-center">
             Esperando a que busquesques una pelicula
           </h1>
         )}
-        {Object.keys(moviesBySearch).length > 0 && (
-          <Paginate
-            parameter={query}
-            functionToExecute={getMoviesBySearch}
-            total_pages={moviesBySearch.total_pages}
-            current_page={moviesBySearch.page}
-          />
-        )}
+        {Object.keys(moviesBySearch).length > 0 &&
+          moviesBySearch.results.length > 0 && (
+            <Paginate
+              parameter={query}
+              functionToExecute={getMoviesBySearch}
+              total_pages={moviesBySearch.total_pages}
+              current_page={moviesBySearch.page}
+            />
+          )}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export default function Results({ img, id }) {
       <img
         className={`image-grid p-2 border rounded mb-2 mt-2 ${CSS.frame_hover} ${CSS.box_shadow}`}
         src={`https://image.tmdb.org/t/p/w185/${img}  `}
-        width="100"
+        width="200"
       />
     </Link>
   );

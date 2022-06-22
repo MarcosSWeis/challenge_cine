@@ -1,9 +1,4 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import $ from "jquery";
 import CardCarruselMovie from "./CardCarruselMovie";
-import MovieContext from "../../Context/Movies/Movie-context";
 
 export default function Carrusel_movies({ dataMovie, title_carrusel }) {
   //const [numberPage, setNumberPage] = useState(0);
