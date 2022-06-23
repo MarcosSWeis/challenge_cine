@@ -13,8 +13,7 @@ export default function MovieDetail() {
     getMovieById(id);
     getMovieRelated(id);
   }, []);
-  console.log(movie_detail, "movie_detail");
-  const title_carrusel = "Películas relacionadas";
+
   return (
     <div>
       {movie_detail && (
@@ -33,7 +32,7 @@ export default function MovieDetail() {
           {
             <Carrusel_movies
               dataMovie={movies_related}
-              title_carrusel={title_carrusel}
+              title_carrusel={"Películas relacionadas"}
             />
           }
         </div>

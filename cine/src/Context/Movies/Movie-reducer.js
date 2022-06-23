@@ -4,6 +4,7 @@ import {
   GET_MOVIES_BY_STAR,
   GET_MOVIE_BY_ID,
   GET_MOVIE_RELATED,
+  GET_MOVIE_MOST_VOTED,
 } from "../actions"; // types
 
 //esta función recibe el estado actual de nuestro contexto y el action va a actualizar mi estado
@@ -14,7 +15,7 @@ export default function (state, action) {
     case GET_MOVIES_HOME: {
       return {
         ...state,
-        moviesHome: payload,
+        moviesPopularMonth: payload,
       };
     }
     case GET_MOVIE_BY_SEARCH: {
@@ -41,7 +42,12 @@ export default function (state, action) {
         movies_related: payload,
       };
     }
-
+    case GET_MOVIE_MOST_VOTED: {
+      return {
+        ...state,
+        moviesMostVotedYear: payload,
+      };
+    }
     default:
       return state;
   }

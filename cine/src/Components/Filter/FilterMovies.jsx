@@ -8,7 +8,7 @@ import CSS from "./filter.module.css";
 export default function FilterMovies() {
   const [selectedRate, setSelectedRate] = useState(null);
   const [hoverRate, setHoverRate] = useState(null);
-  const { getMoviesByFilterStar, setPage } = useContext(MovieContext);
+  const { getMoviesByFilterStar } = useContext(MovieContext);
   let navigate = useNavigate();
   //console.log(moviesFilter, "moviesFilter");
   const posibleRates = [2, 4, 6, 8, 10];
@@ -69,7 +69,6 @@ export default function FilterMovies() {
               (rate <= hoverRate ? ` ${CSS.in_hover} ` : "")
             }
             onClick={() => {
-              setPage(1);
               setSelectedRate(rate);
               getMoviesContext(rate);
               navigateToFilter(rate);

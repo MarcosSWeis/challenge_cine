@@ -1,17 +1,35 @@
 import CardCarruselMovie from "./CardCarruselMovie";
 
 export default function Carrusel_movies({ dataMovie, title_carrusel }) {
-  //const [numberPage, setNumberPage] = useState(0);
-
   let buttons = [0, 1, 2, 3];
-  //setNumberPage(Math.ceil(dataMovie.length / 5));
-  const row = document.querySelector(".container_carrusel");
+  const row = document.querySelectorAll(".container_carrusel");
   const movies = document.querySelectorAll(".movie");
-  const handlerRight = () => {
-    //cuando se quejucte que me haga un scroll
-    //accedemos al ancho completo del carrusel
-    row.scrollLeft += row.offsetWidth;
+
+  const handlerRight = (event) => {
+    function switchNextCarrusel(index) {
+      row[index].scrollLeft +=
+        event.target.offsetParent.offsetParent.clientWidth; //offsetWidth;
+    }
+    if (
+      event.target.offsetParent.offsetParent.children[1].attributes.id.value ==
+      "Populares de este mes"
+    ) {
+      switchNextCarrusel(0);
+    }
+    if (
+      event.target.offsetParent.offsetParent.children[1].attributes.id.value ==
+      "Mas votadas del año"
+    ) {
+      switchNextCarrusel(1);
+    }
+    if (
+      event.target.offsetParent.offsetParent.children[1].attributes.id.value ==
+      "Películas relacionadas"
+    ) {
+      switchNextCarrusel(0);
+    }
     const indicatorActived = document.querySelector(".indicators .active");
+
     if (indicatorActived.nextSibling) {
       //pregunto si tieen un hermano a la derecha , si lo tiene..
       //al indicador a la derecha le pongo la clase activo
@@ -20,10 +38,37 @@ export default function Carrusel_movies({ dataMovie, title_carrusel }) {
       indicatorActived.classList.remove("active");
     }
   };
-  const handlerLeft = () => {
-    //cuando se quejucte que me haga un scroll
+  const handlerLeft = (event) => {
+    //cuando se ejecute que me haga un scroll
     //accedemos al ancho completo del carrusel
-    row.scrollLeft -= row.offsetWidth;
+    console.log(event);
+    console.log(row, "row");
+
+    // console.log(row.scrollLeft, "scrollLeft");
+    // console.log(row.offsetWidth, "offsetWidth");
+    function switchLeftCarrusel(index) {
+      row[index].scrollLeft -=
+        event.target.offsetParent.offsetParent.clientWidth; //offsetWidth;
+    }
+    if (
+      event.target.offsetParent.offsetParent.children[1].attributes.id.value ==
+      "Populares de este mes"
+    ) {
+      switchLeftCarrusel(0);
+    }
+    if (
+      event.target.offsetParent.offsetParent.children[1].attributes.id.value ==
+      "Mas votadas del año"
+    ) {
+      switchLeftCarrusel(1);
+    }
+    if (
+      event.target.offsetParent.offsetParent.children[1].attributes.id.value ==
+      "Películas relacionadas"
+    ) {
+      switchLeftCarrusel(0);
+    }
+
     const indicatorActived = document.querySelector(".indicators .active");
     if (indicatorActived.previousSibling) {
       //pregunto si tieen un hermano a la derecha , si lo tiene..
@@ -48,8 +93,8 @@ export default function Carrusel_movies({ dataMovie, title_carrusel }) {
   });
 
   //mouseleave caundo saco el cursos del elemento dispara el evento
-  if (row) {
-    row.addEventListener("mouseleave", (event) => {
+  if (row.length > 0) {
+    row[0].addEventListener("mouseleave", (event) => {
       movies.forEach((movie) => {
         movie.classList.remove("hover");
       });
@@ -59,7 +104,7 @@ export default function Carrusel_movies({ dataMovie, title_carrusel }) {
   function handlerButtons(event) {
     event.preventDefault();
 
-    row.scrollLeft = event.target.value * row.offsetWidth;
+    row[0].scrollLeft = event.target.value * row[0].offsetWidth;
   }
   return (
     <div className="mt-5 bg_dark ">
@@ -71,14 +116,14 @@ export default function Carrusel_movies({ dataMovie, title_carrusel }) {
               buttons.map((value, index) =>
                 value == 0 ? (
                   <button
-                    key={value}
+                    key={index}
                     className="active"
                     value={value}
                     onClick={handlerButtons}
                   ></button>
                 ) : (
                   <button
-                    key={value}
+                    key={index}
                     value={value}
                     onClick={handlerButtons}
                   ></button>
@@ -91,7 +136,7 @@ export default function Carrusel_movies({ dataMovie, title_carrusel }) {
           <button className="left_arrow" id="left_arrow" onClick={handlerLeft}>
             <i class="bi bi-chevron-compact-left"></i>
           </button>
-          <div className="container_carrusel" id="container_carrusel">
+          <div className="container_carrusel" id={title_carrusel}>
             <div className="carrusel">
               {dataMovie.length > 0 &&
                 dataMovie.map((movie) => (

@@ -9,8 +9,6 @@ export default function Navbar() {
     useContext(MovieContext);
   let navigate = useNavigate();
   function handlerChangeSearch(event) {
-    setValuesPaginate([1, 2, 3]);
-    setPage(1);
     setSearch({
       ...search,
       [event.target.name]: event.target.value,
@@ -22,10 +20,12 @@ export default function Navbar() {
     });
   }
   function handlerSubmit(event) {
-    setPage(1);
-    setValuesPaginate([1, 2, 3]);
+    console.log(event);
     event.preventDefault();
-    getMoviesBySearch({ parameter: search.search });
+    // setPage(1);}
+    console.log(search.search, "search.search");
+
+    getMoviesBySearch({ parameter: search.search }, 1);
     navigateToSearch();
   }
 

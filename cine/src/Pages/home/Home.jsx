@@ -5,17 +5,29 @@ import Paginate from "../../Components/Paginate/Paginate.jsx";
 import Results from "../../Components/searchResults/Results.jsx";
 import MovieContext from "../../Context/Movies/Movie-context";
 function Home() {
-  const { moviesHome, getMoviesRecommended } = useContext(MovieContext);
-  const title_carrusel = "Descubrir";
+  const {
+    moviesPopularMonth,
+    getMoviesPopularThisMonth,
+    getMoviesMostVotedYear,
+    moviesMostVotedYear,
+  } = useContext(MovieContext);
+  console.log(moviesMostVotedYear, "moviesMostVotedYear");
   useEffect(() => {
-    getMoviesRecommended();
+    getMoviesPopularThisMonth();
+    getMoviesMostVotedYear();
   }, []);
   return (
     <div>
       <div>
         <Carrusel_movies
-          dataMovie={moviesHome}
-          title_carrusel={title_carrusel}
+          dataMovie={moviesPopularMonth}
+          title_carrusel={"Populares de este mes"} //descubrir de la consigna
+        />
+      </div>
+      <div>
+        <Carrusel_movies
+          dataMovie={moviesMostVotedYear}
+          title_carrusel={"Mas votadas del año"}
         />
       </div>
     </div>
