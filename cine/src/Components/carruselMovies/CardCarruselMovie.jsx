@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function CardCarruselMovie({ img, id }) {
+  console.log(id, "carrusel");
   return (
     <div class="movie" id="movie">
       <Link to={`/movie/${id}`} key={id}>

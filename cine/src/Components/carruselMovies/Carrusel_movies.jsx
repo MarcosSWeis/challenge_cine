@@ -41,11 +41,7 @@ export default function Carrusel_movies({ dataMovie, title_carrusel }) {
   const handlerLeft = (event) => {
     //cuando se ejecute que me haga un scroll
     //accedemos al ancho completo del carrusel
-    console.log(event);
-    console.log(row, "row");
 
-    // console.log(row.scrollLeft, "scrollLeft");
-    // console.log(row.offsetWidth, "offsetWidth");
     function switchLeftCarrusel(index) {
       row[index].scrollLeft -=
         event.target.offsetParent.offsetParent.clientWidth; //offsetWidth;

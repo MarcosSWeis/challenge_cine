@@ -10,7 +10,6 @@ export default function Search() {
   const { moviesBySearch, getMoviesBySearch } = useContext(MovieContext);
   const { state } = useLocation();
   let { query } = state || {};
-  console.log(moviesBySearch, "query search component");
 
   return (
     <div>

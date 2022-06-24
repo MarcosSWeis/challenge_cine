@@ -10,12 +10,12 @@ export default function FilterMovies() {
   const [hoverRate, setHoverRate] = useState(null);
   const { getMoviesByFilterStar } = useContext(MovieContext);
   let navigate = useNavigate();
-  //console.log(moviesFilter, "moviesFilter");
+
   const posibleRates = [2, 4, 6, 8, 10];
   function getAverage(selectedRate) {
     let vote_average_gte; //mayor =a
     let vote_average_lte; //menor =a
-    //console.log(selectedRate, "selectedRate");
+
     if (selectedRate == 2) {
       vote_average_gte = 0;
       vote_average_lte = 2;

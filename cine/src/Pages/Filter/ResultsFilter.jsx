@@ -6,10 +6,8 @@ import MovieContext from "../../Context/Movies/Movie-context";
 
 export default function ResultsFilter() {
   const { moviesFilter, getMoviesByFilterStar } = useContext(MovieContext);
-  console.log(moviesFilter);
   const { state } = useLocation();
   const { avg, rate } = state || {};
-  //   console.log(avg, "avg");
   return (
     <div>
       <div className="image-grid mt-4 w-100 m-auto">
@@ -18,7 +16,11 @@ export default function ResultsFilter() {
         </h2>
         {Object.keys(moviesFilter).length > 0 &&
           moviesFilter.results.map((results) => (
-            <Results id={results.id} img={results.poster_path} />
+            <Results
+              id={results.id}
+              img={results.poster_path}
+              key={results.id}
+            />
           ))}
         {Object.keys(moviesFilter).length > 0 && (
           <Paginate

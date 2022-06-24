@@ -20,11 +20,7 @@ export default function Navbar() {
     });
   }
   function handlerSubmit(event) {
-    console.log(event);
     event.preventDefault();
-    // setPage(1);}
-    console.log(search.search, "search.search");
-
     getMoviesBySearch({ parameter: search.search }, 1);
     navigateToSearch();
   }

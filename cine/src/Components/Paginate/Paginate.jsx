@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import MovieContext from "../../Context/Movies/Movie-context";
 
 function Paginate({ parameter, functionToExecute, total_pages, current_page }) {
   const [page, setPage] = useState(1);
@@ -18,29 +17,20 @@ function Paginate({ parameter, functionToExecute, total_pages, current_page }) {
         valuesPaginate[i] = valuesPaginate[0] - j;
       }
     }
-    functionToExecute({ parameter: parameter }, page + 1);
+    functionToExecute({ parameter: parameter }, page - 1);
   }
   function handlerFirstNumber() {}
   function handlerMiddleNumber() {}
   function handlerLastNumber() {}
   function handlerNext() {
     setPage(page + 1);
-    console.log("ejecuto handlerNext ");
-
-    console.log(page, "page paginate");
     functionToExecute({ parameter: parameter }, page + 1);
-    // console.loparameterg(search, "search");
   }
-
-  console.log(page, "page paginate fuera de lafuncion");
-
   if (page > valuesPaginate[2]) {
     for (let i = 0, j = 1; i < valuesPaginate.length; i++, j++) {
       valuesPaginate[i] = valuesPaginate[2] + j;
     }
   }
-
-  console.log(valuesPaginate, "valuesPaginate");
   return (
     <div aria-label="" className=" w-75 m-auto ">
       <ul class="pagination w-100 justify-content-center">

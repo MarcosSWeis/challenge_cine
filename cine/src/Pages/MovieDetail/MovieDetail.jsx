@@ -6,13 +6,13 @@ import MovieContext from "../../Context/Movies/Movie-context";
 
 export default function MovieDetail() {
   let { id } = useParams();
-  console.log(id);
+  console.log(id, "movie_detail");
   const { movie_detail, getMovieById, movies_related, getMovieRelated } =
     useContext(MovieContext);
   useEffect(() => {
     getMovieById(id);
     getMovieRelated(id);
-  }, []);
+  }, [id]);
 
   return (
     <div>

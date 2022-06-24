@@ -11,7 +11,6 @@ function Home() {
     getMoviesMostVotedYear,
     moviesMostVotedYear,
   } = useContext(MovieContext);
-  console.log(moviesMostVotedYear, "moviesMostVotedYear");
   useEffect(() => {
     getMoviesPopularThisMonth();
     getMoviesMostVotedYear();
